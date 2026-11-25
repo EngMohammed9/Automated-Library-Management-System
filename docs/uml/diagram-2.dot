@@ -1,0 +1,24 @@
+digraph G { graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.4", ranksep="0.65", fontname="DejaVu Sans"]; node [shape=box, style="rounded,filled", fillcolor="#edf7f8", color="#09636f", fontcolor="#173a42", fontname="DejaVu Sans", fontsize=13, margin="0.14,0.10"]; edge [color="#09636f", fontname="DejaVu Sans", fontsize=10, fontcolor="#173a42"];
+
+start [shape=circle, label="", width=.18, height=.18, style=filled, fillcolor="#173a42"];
+request [label="Member requests a reservation\nfor a selected ISBN"];
+available [shape=diamond, label="Any copy\navailable?", style=filled];
+rejectAvailable [label="Reject reservation;\nmember may borrow instead", fillcolor="#fff2e3"];
+valid [shape=diamond, label="Existing active\nreservation or loan\nfor this title?", style=filled];
+rejectDuplicate [label="Reject duplicate request", fillcolor="#fff2e3"];
+waiting [label="Create WAITING reservation\nappend to FIFO queue"];
+event [label="Wait until a copy is returned\nor a librarian adds a new copy"];
+allocate [label="Allocate available copy to first WAITING member\nBookCopy.hold(memberId); reservation -> READY\nMember.onAvailable(copy)"];
+collect [label="Held member requests checkout"];
+allowed [shape=diamond, label="Correct held member\nand fewer than 3 loans?", style=filled];
+rejectBorrow [label="Reject checkout; hold remains READY", fillcolor="#fff2e3"];
+borrow [label="Create 14-day loan\ncopy -> Checked Out\nreservation -> FULFILLED"];
+finish [shape=doublecircle, label="", width=.23, height=.23, style=filled, fillcolor="#173a42"];
+start -> request -> available;
+available -> rejectAvailable [label="yes"]; rejectAvailable -> finish;
+available -> valid [label="no"]; valid -> rejectDuplicate [label="yes"]; rejectDuplicate -> finish;
+valid -> waiting [label="no"]; waiting -> event -> allocate -> collect -> allowed;
+allowed -> rejectBorrow [label="no"]; rejectBorrow -> finish;
+allowed -> borrow [label="yes"]; borrow -> finish;
+
+}

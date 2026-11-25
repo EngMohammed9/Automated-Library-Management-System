@@ -1,0 +1,20 @@
+digraph G { graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.4", ranksep="0.65", fontname="DejaVu Sans"]; node [shape=box, style="rounded,filled", fillcolor="#edf7f8", color="#09636f", fontcolor="#173a42", fontname="DejaVu Sans", fontsize=13, margin="0.14,0.10"]; edge [color="#09636f", fontname="DejaVu Sans", fontsize=10, fontcolor="#173a42"];
+
+node [shape=record, style=filled];
+Book [label="{Book|isbn: String\ltitle: String\lauthor: String\l|update(title, author)\l}"];
+Copy [label="{BookCopy|id: String\lheldFor: String\lstate: CopyState\l|borrow(memberId)\lcheckIn()\lhold(memberId)\l}"];
+Loan [label="{Loan|borrowedOn: LocalDate\ldueOn: LocalDate\lreturnedOn: LocalDate\lfine: BigDecimal\l|close(date, fee)\lisOverdue(date)\l}"];
+User [label="{User (abstract)|id: String\lname: String\l}"];
+Member [label="{Member|notifications: List\l|onAvailable(copy)\l}"];
+Librarian [label="{Librarian}"];
+Observer [label="{AvailabilityObserver (interface)|onAvailable(copy)\l}"];
+Reservation [label="{Reservation|status: WAITING / READY / FULFILLED\lcopyId: String\l|ready(copyId)\lfulfill()\l}"];
+Copy -> Book [label="book", taillabel="0..*", headlabel="1", dir=none];
+Loan -> Copy [label="copy", taillabel="0..*", headlabel="1", dir=none];
+Loan -> Member [label="borrower", taillabel="0..*", headlabel="1", dir=none];
+Reservation -> Book [label="title", taillabel="0..*", headlabel="1", dir=none];
+Reservation -> Member [label="requester", taillabel="0..*", headlabel="1", dir=none];
+Member -> User [arrowhead=empty]; Librarian -> User [arrowhead=empty];
+Member -> Observer [arrowhead=empty, style=dashed];
+
+}

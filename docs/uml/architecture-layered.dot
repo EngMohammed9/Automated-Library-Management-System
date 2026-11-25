@@ -1,0 +1,13 @@
+digraph G { graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.4", ranksep="0.65", fontname="DejaVu Sans"]; node [shape=box, style="rounded,filled", fillcolor="#edf7f8", color="#09636f", fontcolor="#173a42", fontname="DejaVu Sans", fontsize=13, margin="0.14,0.10"]; edge [color="#09636f", fontname="DejaVu Sans", fontsize=10, fontcolor="#173a42"];
+
+ui [label="Presentation\nlibrary.ui: Main, Demo"];
+services [label="Application / Business\nlibrary.service: facade, services, reports, fee policy"];
+data [label="Data Access\nlibrary.data: LibraryStore"];
+model [label="Shared Domain Model\nlibrary.model: users, books, copies, loans, reservations\nAvailabilityObserver"];
+ui -> services [label="business operations"];
+services -> data [label="data access"];
+ui -> model [style=dashed, label="reads results"];
+services -> model [style=dashed, label="domain operations"];
+data -> model [style=dashed, label="domain records"];
+
+}

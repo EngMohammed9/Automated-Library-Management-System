@@ -1,0 +1,14 @@
+digraph G { graph [rankdir=LR, bgcolor="white", pad="0.3", nodesep="0.4", ranksep="0.65", fontname="DejaVu Sans"]; node [shape=box, style="rounded,filled", fillcolor="#edf7f8", color="#09636f", fontcolor="#173a42", fontname="DejaVu Sans", fontsize=13, margin="0.14,0.10"]; edge [color="#09636f", fontname="DejaVu Sans", fontsize=10, fontcolor="#173a42"];
+
+start [shape=circle, label="", width=.18, height=.18, style=filled, fillcolor="#173a42"];
+Available [label="Available"];
+CheckedOut [label="Checked Out"];
+Reserved [label="Reserved\nheldFor = memberId"];
+start -> Available;
+Available -> CheckedOut [label="borrow(memberId)"];
+CheckedOut -> Available [label="checkIn()"];
+Available -> Reserved [label="hold(memberId)\nnext waiting reservation"];
+Reserved -> CheckedOut [label="borrow(memberId)\n[memberId == heldFor]"];
+note [shape=note, fillcolor="#fff8e7", label="Invalid transitions throw an exception.\nOverdue is derived from Loan.dueOn;\nit is not a BookCopy state."];
+
+}

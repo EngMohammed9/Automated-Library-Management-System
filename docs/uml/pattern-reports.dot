@@ -1,0 +1,12 @@
+digraph G { graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.4", ranksep="0.65", fontname="DejaVu Sans"]; node [shape=box, style="rounded,filled", fillcolor="#edf7f8", color="#09636f", fontcolor="#173a42", fontname="DejaVu Sans", fontsize=13, margin="0.14,0.10"]; edge [color="#09636f", fontname="DejaVu Sans", fontsize=10, fontcolor="#173a42"];
+
+node [shape=record, style=filled];
+Report [label="{Reports.Report (abstract)|generate(): String (final)\lselectRows() / title() / footer(rows)\l}"];
+Creator [label="{Reports.ReportCreator (abstract)|createReport(store, date)\lgenerate(store, date)\l}"];
+Active [label="{ActiveReport}"]; Overdue [label="{OverdueReport}"]; Fees [label="{FineReport}"];
+AC [label="{ActiveReportCreator}"]; OC [label="{OverdueReportCreator}"]; FC [label="{FineReportCreator}"];
+Active -> Report [arrowhead=empty]; Overdue -> Report [arrowhead=empty]; Fees -> Report [arrowhead=empty];
+AC -> Creator [arrowhead=empty]; OC -> Creator [arrowhead=empty]; FC -> Creator [arrowhead=empty];
+AC -> Active [label="creates", style=dashed]; OC -> Overdue [label="creates", style=dashed]; FC -> Fees [label="creates", style=dashed];
+
+}
