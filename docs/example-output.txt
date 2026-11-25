@@ -1,0 +1,40 @@
+=== LIBRARY DEMONSTRATION ===
+
+1. Sara searches for Clean Code:
+9780132350884 | Clean Code | Robert C. Martin
+
+2. Sara borrows C1:
+L1 | member=M1 | copy=C1 | borrowed=2026-11-01 | due=2026-11-15 | ACTIVE
+
+3. Omar attempts to borrow the same copy:
+Rejected: Copy is unavailable or held for another member.
+
+4. Omar reserves the unavailable book:
+R1 | Clean Code | M2 | WAITING
+
+5. Librarian views overdue loans on 2026-11-20:
+=== Overdue Loans ===
+As of: 2026-11-20
+L1 | member=M1 | copy=C1 | borrowed=2026-11-01 | due=2026-11-15 | ACTIVE
+Records: 1
+
+6. Sara returns C1 five days late:
+L1 | member=M1 | copy=C1 | borrowed=2026-11-01 | due=2026-11-15 | returned=2026-11-20 | fine=SAR 5.00
+C1 | Clean Code | Reserved (held for M2)
+
+7. Observer notification for Omar:
+Copy C1 of 'Clean Code' is held for you.
+
+8. Omar borrows his reserved copy:
+L2 | member=M2 | copy=C1 | borrowed=2026-11-20 | due=2026-12-04 | ACTIVE
+R1 | Clean Code | M2 | FULFILLED | copy=C1
+
+9. Librarian reports:
+=== Active Loans ===
+As of: 2026-11-20
+L2 | member=M2 | copy=C1 | borrowed=2026-11-20 | due=2026-12-04 | ACTIVE
+Records: 1
+=== Recorded Late Fees ===
+As of: 2026-11-20
+L1 | member=M1 | copy=C1 | borrowed=2026-11-01 | due=2026-11-15 | returned=2026-11-20 | fine=SAR 5.00
+Records: 1 | Total recorded fees: SAR 5.00
