@@ -6,3 +6,12 @@
 *.yml text eol=lf
 *.png binary
 *.pdf binary
+
+# Report application and test source in GitHub's language statistics.
+*.java linguist-language=Java linguist-detectable=true linguist-documentation=false linguist-vendored=false linguist-generated=false
+
+# Keep launch scripts and supporting documentation outside the language chart.
+*.sh linguist-detectable=false
+*.bat linguist-detectable=false
+docs/** linguist-documentation=true
+.github/** linguist-detectable=false
